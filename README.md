@@ -1,5 +1,4 @@
 # Yom Kippur
-----
 [Yom Kippur](https://en.wikipedia.org/wiki/Yom_Kippur) is a WhatsApp automation tool which aims to be a consistent and permanent solution for non-commercial usage of WhatsApp as an automated bot. 
 
 ### What does it do?
@@ -22,6 +21,7 @@ At the very first, I saw [yowsup](https://github.com/tgalal/yowsup) my only choi
 Well, Dependencies in this project, they are rather a lot!
 First of you should have this requiremnts satisfied:</br>
 Windows Installers are refrenced, but it can be implment in linux or MacOS machine (both of them not tested)
+
 | Dependency | Description / Download Links |
 | ------ | ------ |
 | Android Studio | [Android Studio with Android API 28](https://developer.android.com/studio) |
