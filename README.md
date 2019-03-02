@@ -102,7 +102,8 @@ C:\var\log\
 ```
 
 **7.Set the Yom Kippur’s configuration file** </br>
-Go to `YomKippur-master\configs\config.cfg` and input the following. (don't change anything esle unless you know what are you doing)
+Go to `YomKippur-master\configs\config.cfg` and input the following.</br> 
+(don't change anything esle unless you know what are you doing)
 ```sh
 [mysql]
 host=127.0.0.1
@@ -124,11 +125,41 @@ listen_message=whatsapp_messagelistener_queue
 
 ```
 
-Run the `main.py` and `add_new_contact_producer.p` in two separate terminal/CMD environment.</br> if you didn't see any error, you are good to go.
+Run the `main.py` and `add_new_contact_producer.py` in two separate terminal/CMD environment.</br> if you didn't see any error, you are good to go.
 
 
 ### Runnig
 ----
+1. make sure MySQL server is running
+2. make sure RabbitMQ sever is runnig
+3. run Appium with defualt settings
+3. run these scripts
+```sh
+python main.py
+python add_new_contact_producer.py
+python single_message_producer.py
+
+```
+4. run Postman and create desirable Post commands from the list below:
+
+#### Adding contact in Google Contacts APP
+URL : [http://127.0.0.1:5000/api/v0.1/add_new_contact](http://127.0.0.1:5000/api/v0.1/add_new_contact) </br>
+TYPE : POST</br>
+HEADERS : Content-Type:application/json</br>
+BODY :</br>
+{"mobile_number":"+98 XXXXX XXXXX","emulator_name":"pix"}</br>
+RESPONSE :</br>
+{ "corr_id": "767ae095-0066-49fb-b955-063286ceed1e", "message": "Singal received for Adding Contact", "status": "1" }</br>
+
+#### Sending Single Message via Whatsapp
+URL : [http://127.0.0.1:5000/api/v0.1/send_single_message](http://127.0.0.1:5000/api/v0.1/send_single_message)</br>
+TYPE: POST</br>
+HEADERS :</br>
+Content-Type:application/json</br>
+BODY :</br>
+{"mobile_number":"+98 XXXXX XXXXX","emulator_name":"pix","message_body":"Salaaaaam!"}</br>
+Response :</br>
+{ "corr_id": "78f21f25-b781-4312-87e5-ebcd73e9b67e", "message": "Singal received for sending message", "status": "1" }</br>
 
 
 ### Development and Contribute?
