@@ -1,17 +1,10 @@
 import os, sys
 import ConfigParser
 
-# define different level of environments
-
-ENV_CONFIG = {
-    'dev': 'dev',
-    'prod': 'prod',
-    'staging': 'staging'
-}
-
+# copy and pasting from stackoverflow !
 def load_env_configuration():
     config = ConfigParser.RawConfigParser()
-    config.read((os.path.join(os.getcwd(), 'configs/dev.cfg')))
+    config.read((os.path.join(os.getcwd(), 'configs/config.cfg')))
     return config
 
 global configp
