@@ -44,8 +44,8 @@ class WhatsAppAddNewContact(ParametrizedTestCase):
         desired_caps['appPackage'] = 'com.android.contacts'
         desired_caps['appActivity'] = '.activities.PeopleActivity'
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-        #self.emulator_name = 'pixel_1'
-        #self.mobile_number = '+91 78386 67436'
+        #self.emulator_name = 'pix'
+        #self.mobile_number = '+98 9038308784'
         #self.message_body = 'Hello There!'
         self.emulator_name = self.emulator_name
         self.mobile_number = self.mobile_number

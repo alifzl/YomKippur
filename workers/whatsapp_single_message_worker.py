@@ -136,7 +136,7 @@ class WhatsAppSingleMessage(ParametrizedTestCase):
         else:
             print "New Chat Icon/button not found"
  
-#---START OF SCRIPT
+# uncomment in case of unit testing
 #if __name__ == '__main__':
     #suite = unittest.TestLoader().loadTestsFromTestCase(WhatsAppSingleMessage(emulator_name,mobile_number,message_body))
     #unittest.TextTestRunner(verbosity=2).run(suite)
