@@ -4,14 +4,14 @@
 ### What does it do?
 ----
   - Send/Recieve Single Message in a pre-configured WhatsApp application in the AVD (Android Virtual Device)
-  - create contact-list in AVD and use it for the Sending/ Receiving stuff
+  - create contact-list in AVD and use it for the Sending/Receiving stuff
   - literally it can do everything with AVD (it create a numerous possibilities to persuade)
 
 
 
 ### Motivations
 ----
-At the very first, I saw [yowsup](https://github.com/tgalal/yowsup) my only choice, but due to the issues listed below I changed my mind in order to implement it in another way.
+At the very first, I saw [yowsup](https://github.com/tgalal/yowsup) my only choice, but due to the issues listed below I changed my mind in order to implement it in another way:
   - Variety of community issues (linked [here](https://github.com/tgalal/yowsup/issues))
   - Yosup is asynchronous kind of API which interacts with WhatsApp RestAPI, regarding the high-security considerations of WhatsApp, it came very sensitive about the present active sessions of every user and it will be not very friendly with synchronous solutions. (as you probably know the restrictions of using web-view of the WhatsApp which says that we should have a consistent active internet connection in the phone simultaneously)
   - the laziness of mine and also challenging myself to do it in the hard way
@@ -33,13 +33,13 @@ Windows Installers are refrenced, but it can be implment in linux or MacOS machi
 | Postman | [Latest version of Postman](https://www.getpostman.com/downloads/) |
 
 **Considerations:**
- you can use conda virenv for the python 2.7, but it drived me a serious headache (Not Recommended)
- main reason which i used python 2 for this project is that Appium, MySQL connector client and RabbitMQ were incompatibile together in version 3.
+ you can use conda virenv for the python 2.7, but it drived me a serious headache (Not Recommended)</br>
+ main reason which I used python 2 for this project is that Appium, MySQL connector client and RabbitMQ were incompatibile together in version 3.
 
 
 ### Configuration
 
-First of all, be patient in this part. it takes me blood and tears to wipe the dependency shits for doing this such a simple task.</br>
+First of all, be patient in this part. it took me blood and tears to wipe the dependency shits for doing this such a simple task.</br>
 
 **1.Android Virtual Device** </br>
 luanch AVD Manager of Android Studio, setup an device with android 9.0 with API 28 (pick and appropriate name for the AVD because we need it in further steps). </br>
@@ -77,6 +77,58 @@ rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
 ```
 login with newly created credentials and import the queue specifications which is already attached in this Repo which called `RabbitMQ_Conf.json` in the Import definitions sections under the overview menue.</br>
 it would create the necessary configurations for the RabbitMQ and enables the needed privilages. 
+
+**3.Appium** </br>
+Just run the Appium server with the default settings. `appium --default-capabilities '{"noReset": "True"}'` is already embeded in code. TL;DR: there is no thing to do in this step.
+
+**4.MySQL** </br>
+Install the community edition of the MySQL, create an appropriate DB account and set the service run automatically when OS starts.
+
+**5.Install the python dependencies** </br>
+Simply run `pip install –r dependencies.txt` in order to resolve the dependency of used libraries.</br>
+You may face deprecated version of `MySQLdb` library which is solvable with installing [this]( https://pypi.org/project/MySQL-python/) and [this]( https://dev.mysql.com/downloads/connector/python/). Take care of installing the python 2.x version of mentioned libraries.
+
+**6.Create directories for the log files** </br>
+Create the directories and files as it’s mentioned below:
+```sh
+# directories
+C:\var\log [directory]
+C:\var\log\whatsapp_api [directory]
+# log files
+C:\var\log\api.log
+C:\var\log\whatsapp_single_consumer.log
+C:\var\log\whatsapp_single_worker.log
+C:\var\log\
+```
+
+**7.Set the Yom Kippur’s configuration file** </br>
+Go to `YomKippur-master\configs\config.cfg` and input the following. (don't change anything esle unless you know what are you doing)
+```sh
+[mysql]
+host=127.0.0.1
+username='your MySQL username'
+password='your MySQL password'
+database=Whatsapp
+
+[rabbitmq]
+ip=127.0.0.1
+ipqueuename=ipaddr.queue
+username='your RabbitMQ username'      
+password='your RabbitMQ password' 
+
+[queue_name]
+single_message=whatsapp_singlemessage_queue
+broadcast_message=whatsapp_broadcastmessage_queue
+add_contact=whatsapp_newcontact_listener_queue
+listen_message=whatsapp_messagelistener_queue
+
+```
+
+Run the `main.py` and `add_new_contact_producer.p` in two separate terminal/CMD environment.</br> if you didn't see any error, you are good to go.
+
+
+### Runnig
+----
 
 
 ### Development and Contribute?
