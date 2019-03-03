@@ -3,6 +3,9 @@
 
 ### What does it do?
 ----
+
+[![Yom Kippur Demonstration](https://img.youtube.com/vi/VTgXjtM48eQ/0.jpg)](https://www.youtube.com/watch?v=VTgXjtM48eQ)
+
   - Send/Recieve Single Message in a pre-configured WhatsApp application in the AVD (Android Virtual Device)
   - create contact-list in AVD and use it for the Sending/Receiving stuff
   - literally it can do everything with AVD (it create a numerous possibilities to persuade)
